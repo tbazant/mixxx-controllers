@@ -219,7 +219,7 @@ NS4FX.init = function(id, debug) {
                         break;
                     }
                 }
-                if (heldStemInfo) { break; }
+                if (heldStemInfo) {break;}
             }
             if (heldStemInfo) {
                 let controlSuffix;
@@ -287,12 +287,12 @@ NS4FX.init = function(id, debug) {
     // effects
     NS4FX.effectUnit = new NS4FX.EffectUnit();
     const effects = [
-        { unit: 1, slot: 1, id: 9, meta: 0.9 },
-        { unit: 1, slot: 2, id: 9, meta: 0.1 },
-        { unit: 1, slot: 3, id: 10, meta: 1 },
-        { unit: 2, slot: 1, id: 8, meta: 1 },
-        { unit: 2, slot: 2, id: 12, meta: 1 },
-        { unit: 2, slot: 3, id: 18, meta: 1 }
+        {unit: 1, slot: 1, id: 9, meta: 0.9},
+        {unit: 1, slot: 2, id: 9, meta: 0.1},
+        {unit: 1, slot: 3, id: 10, meta: 1},
+        {unit: 2, slot: 1, id: 8, meta: 1},
+        {unit: 2, slot: 2, id: 12, meta: 1},
+        {unit: 2, slot: 3, id: 18, meta: 1}
     ];
 
     effects.forEach(function(effect) {
@@ -422,7 +422,7 @@ NS4FX.init = function(id, debug) {
                 // When a deck's BPM changes, update its arrows and its opposite's arrows.
                 NS4FX.updateBpmArrows(deckNum);
                 let oppositeDeckNum;
-                if (deckNum === 1) { oppositeDeckNum = 2; } else if (deckNum === 2) { oppositeDeckNum = 1; } else if (deckNum === 3) { oppositeDeckNum = 4; } else if (deckNum === 4) { oppositeDeckNum = 3; }
+                if (deckNum === 1) {oppositeDeckNum = 2;} else if (deckNum === 2) {oppositeDeckNum = 1;} else if (deckNum === 3) {oppositeDeckNum = 4;} else if (deckNum === 4) {oppositeDeckNum = 3;}
                 NS4FX.updateBpmArrows(oppositeDeckNum);
             });
         })(i);
@@ -431,7 +431,7 @@ NS4FX.init = function(id, debug) {
     // object to hold left and right VU levels for each channel
     NS4FX.vu_levels = {};
     for (let i = 1; i <= 4; i++) {
-        NS4FX.vu_levels[`[Channel${i}]`] = { left: 0, right: 0 };
+        NS4FX.vu_levels[`[Channel${i}]`] = {left: 0, right: 0};
     }
 
     NS4FX.dbg("NS4FX.init finished");
@@ -538,7 +538,7 @@ NS4FX.EffectUnit = function() {
 
     this.toggleEffect = function(effectName) {
         const effect = this.effects.find(e => e.name === effectName);
-        if (!effect) { return; }
+        if (!effect) {return;}
 
         const group = `[EffectRack1_EffectUnit${effect.unit}_Effect${this.effects.filter(e => e.unit === effect.unit).indexOf(effect) + 1}]`;
 
@@ -570,12 +570,12 @@ NS4FX.EffectUnit = function() {
     });
 
     this.effects = [
-        { name: "hpf", status: 0x98, control: 0x00, unit: 1 },
-        { name: "lpf", status: 0x98, control: 0x01, unit: 1 },
-        { name: "flanger", status: 0x98, control: 0x02, unit: 1 },
-        { name: "echo", status: 0x99, control: 0x03, unit: 2 },
-        { name: "reverb", status: 0x99, control: 0x04, unit: 2 },
-        { name: "phaser", status: 0x99, control: 0x05, unit: 2 }
+        {name: "hpf", status: 0x98, control: 0x00, unit: 1},
+        {name: "lpf", status: 0x98, control: 0x01, unit: 1},
+        {name: "flanger", status: 0x98, control: 0x02, unit: 1},
+        {name: "echo", status: 0x99, control: 0x03, unit: 2},
+        {name: "reverb", status: 0x99, control: 0x04, unit: 2},
+        {name: "phaser", status: 0x99, control: 0x05, unit: 2}
     ];
     this.activeEffect = null;
 
@@ -707,10 +707,10 @@ NS4FX.Deck = function(number, midi_chan) {
     // If using stems, create state objects for each pad to track hold timers and states.
     // This is necessary for the hold-for-volume/effect functionality.
     if (useFadercutsAsStems) {
-        this.stemPad1 = { timerId: null, isHeldForVolume: false };
-        this.stemPad2 = { timerId: null, isHeldForVolume: false };
-        this.stemPad3 = { timerId: null, isHeldForVolume: false };
-        this.stemPad4 = { timerId: null, isHeldForVolume: false };
+        this.stemPad1 = {timerId: null, isHeldForVolume: false};
+        this.stemPad2 = {timerId: null, isHeldForVolume: false};
+        this.stemPad3 = {timerId: null, isHeldForVolume: false};
+        this.stemPad4 = {timerId: null, isHeldForVolume: false};
     }
 
     components.Deck.call(this, number);
@@ -755,9 +755,9 @@ NS4FX.Deck = function(number, midi_chan) {
                 };
             };
 
-            deck.high_eq = new components.Pot({ input: createStemEffectInput(4, "parameter3") });      // Vocals effect
-            deck.mid_eq = new components.Pot({ input: createStemEffectInput(3, "parameter2") });       // Melody effect
-            deck.low_eq = new components.Pot({ input: createStemEffectInput([1, 2], "parameter1") });  // Drums & Bass effect
+            deck.high_eq = new components.Pot({input: createStemEffectInput(4, "parameter3")});      // Vocals effect
+            deck.mid_eq = new components.Pot({input: createStemEffectInput(3, "parameter2")});       // Melody effect
+            deck.low_eq = new components.Pot({input: createStemEffectInput([1, 2], "parameter1")});  // Drums & Bass effect
             return; // Exit to prevent running the standard EQ/stem logic
         }
 
@@ -774,9 +774,9 @@ NS4FX.Deck = function(number, midi_chan) {
         if (currentEQsAs === "normal") {
             // If 'normal' mode, enable the EQ effect unit and map knobs to standard EQs.
             engine.setValue(eq_group, "enabled", true);
-            deck.high_eq = new components.Pot({ group: eq_group, inKey: "parameter3" });
-            deck.mid_eq = new components.Pot({ group: eq_group, inKey: "parameter2" });
-            deck.low_eq = new components.Pot({ group: eq_group, inKey: "parameter1" });
+            deck.high_eq = new components.Pot({group: eq_group, inKey: "parameter3"});
+            deck.mid_eq = new components.Pot({group: eq_group, inKey: "parameter2"});
+            deck.low_eq = new components.Pot({group: eq_group, inKey: "parameter1"});
         } else {
             // If not 'normal', EQs are used for stem control.
             NS4FX.dbg(`Deck ${deck.number}: EQs are configured as Stems in '${currentEQsAs}' mode.`);
@@ -802,10 +802,10 @@ NS4FX.Deck = function(number, midi_chan) {
                 lowEQInput = createStemInput([1, 2], "parameter1");  // Drums & Bass
                 // 'stemSoftMax' mode: Uses a softmax function to balance stem volumes. Turning one knob up turns others down.
             } else if (currentEQsAs === "stemSoftMax") {
-                deck.logits = { z_v: 1, z_m: 1, z_d: 1 };
+                deck.logits = {z_v: 1, z_m: 1, z_d: 1};
 
                 const updateStemVolumes = function(deckToUpdate) {
-                    const { z_v, z_m, z_d } = deckToUpdate.logits;
+                    const {z_v, z_m, z_d} = deckToUpdate.logits;
 
                     const exp_zv = Math.exp(z_v);
                     const exp_zm = Math.exp(z_m);
@@ -814,7 +814,7 @@ NS4FX.Deck = function(number, midi_chan) {
                     // Denominator for the softmax calculation. Drums and bass are weighted together.
                     const denominator = exp_zv + exp_zm + 2 * exp_zd;
 
-                    if (denominator === 0) { return; } // Avoid division by zero.
+                    if (denominator === 0) {return;} // Avoid division by zero.
 
                     const volumes = {
                         v_v: exp_zv / denominator,
@@ -838,11 +838,11 @@ NS4FX.Deck = function(number, midi_chan) {
                 lowEQInput = createSoftmaxInput("z_d", "parameter1");
                 // 'stemGatedAttenuation' mode: A more complex model where knobs can attenuate their own stem or focus it while attenuating others.
             } else if (currentEQsAs === "stemGatedAttenuation") {
-                deck.attenuation = { x_v: 0.5, x_m: 0.5, x_d: 0.5 }; // Centered
+                deck.attenuation = {x_v: 0.5, x_m: 0.5, x_d: 0.5}; // Centered
                 const GAMMA = 2;
 
                 const updateStemVolumes = function(deckToUpdate) {
-                    const { x_v, x_m, x_d } = deckToUpdate.attenuation;
+                    const {x_v, x_m, x_d} = deckToUpdate.attenuation;
                     // The knob's right side (0.5 to 1) controls focus, increasing the stem's volume relative to others.
 
                     // --- Focus (right side: 0 → 1) ---
@@ -886,11 +886,11 @@ NS4FX.Deck = function(number, midi_chan) {
                 lowEQInput = createGatedAttenuationInput("x_d", "parameter1");
                 // 'stemTriangle' mode: A volume balancing model based on a triangular function.
             } else if (currentEQsAs === "stemTriangle") {
-                deck.triangle = { x_v: 0.5, x_m: 0.5, x_d: 0.5 }; // Centered at 0.5
+                deck.triangle = {x_v: 0.5, x_m: 0.5, x_d: 0.5}; // Centered at 0.5
                 const GAMMA = 2;
 
                 const updateStemVolumes = function(deckToUpdate) {
-                    const { x_v, x_m, x_d } = deckToUpdate.triangle;
+                    const {x_v, x_m, x_d} = deckToUpdate.triangle;
                     // This function processes the knob value to create a non-linear response.
 
                     const processKnob = function(x) {
@@ -910,7 +910,7 @@ NS4FX.Deck = function(number, midi_chan) {
                     const V_v = (denominator > 0) ? w_v / denominator : 0;
                     const V_m = (denominator > 0) ? w_m / denominator : 0;
                     const V_d = (denominator > 0) ? w_d / denominator : 0;
-                    const volumes = { v_v: V_v, v_m: V_m, v_d: V_d };
+                    const volumes = {v_v: V_v, v_m: V_m, v_d: V_d};
                     NS4FX.normalizeAndApplyStemVolumes(deckToUpdate, volumes);
                 };
                 updateStemVolumes(deck);
@@ -928,9 +928,9 @@ NS4FX.Deck = function(number, midi_chan) {
                 lowEQInput = createTriangleInput("x_d", "parameter1");
             }
             // Assign the created input handlers to the EQ knob components.
-            deck.high_eq = new components.Pot({ input: highEQInput });
-            deck.mid_eq = new components.Pot({ input: midEQInput });
-            deck.low_eq = new components.Pot({ input: lowEQInput });
+            deck.high_eq = new components.Pot({input: highEQInput});
+            deck.mid_eq = new components.Pot({input: midEQInput});
+            deck.low_eq = new components.Pot({input: lowEQInput});
         }
     };
 
@@ -976,7 +976,7 @@ NS4FX.Deck = function(number, midi_chan) {
             // To prevent this, we disconnect the buttons, wait for the engine state to settle,
             // then reconnect and perform a manual update.
             if (deck.padmode_str === "hotcue") {
-                deck.hotcues.forEachComponent(function(c) { c.disconnect(); });
+                deck.hotcues.forEachComponent(function(c) {c.disconnect();});
             }
 
             engine.beginTimer(50, function() {
@@ -1499,15 +1499,15 @@ NS4FX.Deck = function(number, midi_chan) {
     this.pitch_bend_up = new components.Button({
         inKey: "rate_temp_up",
         input: pitch_button_handler,
-        shift: function() { this.inKey = "pitch_up"; },
-        unshift: function() { this.inKey = "rate_temp_up"; },
+        shift: function() {this.inKey = "pitch_up";},
+        unshift: function() {this.inKey = "rate_temp_up";},
     });
 
     this.pitch_bend_down = new components.Button({
         inKey: "rate_temp_down",
         input: pitch_button_handler,
-        shift: function() { this.inKey = "pitch_down"; },
-        unshift: function() { this.inKey = "rate_temp_down"; },
+        shift: function() {this.inKey = "pitch_down";},
+        unshift: function() {this.inKey = "rate_temp_down";},
     });
 
     this.pitch_bend_up.other = this.pitch_bend_down;
@@ -1863,8 +1863,8 @@ NS4FX.Deck = function(number, midi_chan) {
         };
     };
     this.updateEQs();
-    engine.makeConnection(this.currentDeck, "track_loaded", function() { deck.updateEQs(); });
-    engine.makeConnection(this.currentDeck, "passthrough", function() { deck.updateEQs(); });
+    engine.makeConnection(this.currentDeck, "track_loaded", function() {deck.updateEQs();});
+    engine.makeConnection(this.currentDeck, "passthrough", function() {deck.updateEQs();});
 };
 
 NS4FX.Deck.prototype = new components.Deck();
@@ -1989,8 +1989,8 @@ NS4FX.encodeNumToArray = function(number) {
     ];
 
     // Manually set the first nibble to indicate the sign.
-    if (isNegative) { number_array[0] = 0x07; } // Sign nibble for negative
-    else { number_array[0] = 0x08; } // Sign nibble for positive
+    if (isNegative) {number_array[0] = 0x07;} // Sign nibble for negative
+    else {number_array[0] = 0x08;} // Sign nibble for positive
 
     return number_array;
 };
@@ -2114,12 +2114,12 @@ NS4FX.timeMs = function(_deck, position, duration) {
 NS4FX.scratch_timer = []; // initialized before use (null is an acceptable value)
 NS4FX.scratch_tick = [];  // initialized before use
 NS4FX.resetScratchTimer = function(deck, tick) {
-    if (!NS4FX.scratch_timer[deck]) { return; }
+    if (!NS4FX.scratch_timer[deck]) {return;}
     NS4FX.scratch_tick[deck] = tick;
 };
 
 NS4FX.startScratchTimer = function(deck) {
-    if (NS4FX.scratch_timer[deck]) { return; }
+    if (NS4FX.scratch_timer[deck]) {return;}
 
     NS4FX.scratch_tick[deck] = 0;
     NS4FX.scratch_timer[deck] = engine.beginTimer(20, () => {
@@ -2234,8 +2234,8 @@ NS4FX.wheelTurn = function(channel, _control, value, _status, group) {
     // detect searching the track
     if (NS4FX.searching[deck]) {
         let position = engine.getValue(group, "playposition");
-        if (position <= 0) { position = 0; }
-        if (position >= 1) { position = 1; }
+        if (position <= 0) {position = 0;}
+        if (position >= 1) {position = 1;}
         engine.setValue(group, "playposition", position + newValue * 0.0001);
         NS4FX.resetScratchTimer(deck, newValue);
         return;
@@ -2280,13 +2280,13 @@ NS4FX.wheelTurn = function(channel, _control, value, _status, group) {
 
 NS4FX.wheel = []; // initialized in the NS4FX.init() function
 NS4FX.wheelToggle = function(channel, _control, value, _status, _group) {
-    if (value !== 0x7F) { return; }
+    if (value !== 0x7F) {return;}
     if (NS4FX.shift) {
         NS4FX.elapsedToggle();
     } else {
         NS4FX.wheel[channel] = !NS4FX.wheel[channel];
         let on_off = 0x01;
-        if (NS4FX.wheel[channel]) { on_off = 0x7F; }
+        if (NS4FX.wheel[channel]) {on_off = 0x7F;}
         midi.sendShortMsg(0x90 | channel, 0x07, on_off);
     }
 };
