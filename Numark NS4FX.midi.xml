@@ -40,6 +40,12 @@
                 <value label="Stem Control (Gated Attenuation)">stemGatedAttenuation</value>
                 <value label="Stem Control (Triangle)">stemTriangle</value>
             </option>
+            <option
+                type="boolean"
+                default="false"
+                variable="useEQs34asStemEffects"
+                label="Control stems effects with EQ knobs" 
+                description="When enabled, the EQ knobs of decks 3 and 4 control stem effects of decks 1 and 2."/>
         </group>
     </settings>
     <controller id="NS4FX">
